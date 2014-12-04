@@ -27,7 +27,7 @@ INCLUDE_DIRECTORIES(
 
 # Set sources
 ADD_EXECUTABLE(${PROJECT_NAME}
-	src/main.cpp
+	src/main.c
 	src/oduinoSerialReader.cpp
 )
 

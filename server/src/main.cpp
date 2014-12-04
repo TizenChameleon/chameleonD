@@ -1,13 +1,18 @@
 #include <Ecore.h>
+#include "oduinoSerialReader.h"
 
-Ecore_Timer         *timer1     = NULL;
+Ecore_Timer         *timer     = NULL;
 Ecore_Event_Handler *handler1   = NULL;
-double               start_time = 0.0;
+SerialReader serialReader;
+int temp=0, hum=0;
+
 
 int
-timer_func(void *data)
+getSensor_redrawScreen(void *data)
 {
-   printf("Tick timer. Sec: %3.2f\n", ecore_time_get() - start_time);
+   temp = serialReader.get_Temperature();
+   hum = serialReader.get_Humidity();
+printf("Temperature %d, Humidity %d\n",temp, hum);
    return ECORE_CALLBACK_RENEW;
 }
 
@@ -29,9 +34,10 @@ main(int argc, const char **argv)
 {
    ecore_init();
    ecore_app_args_set(argc, argv);
-   start_time = ecore_time_get();
-   handler1 = ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_func, NULL);
-   timer1 = ecore_timer_add(0.5, timer_func, NULL);
+
+
+   handler = ecore_event_handler_add(ECORE_EVENT_SIGNAL_EXIT, exit_func, NULL);
+   timer = ecore_timer_add(0.5, getSensor_redrawScreen, NULL);
    ecore_main_loop_begin();
    ecore_shutdown();
    return 0;
