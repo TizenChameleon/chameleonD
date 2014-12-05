@@ -18,7 +18,7 @@ getSensor_redrawScreen(void *data)
 {
    temp = serialReader.get_Temperature();
    hum = serialReader.get_Humidity();
-PRT_ERR("Temperature %d, Humidity %d\n",templ, hum);
+PRT_ERR("Temperature %d, Humidity %d\n",temp, hum);
    return ECORE_CALLBACK_RENEW;
 }
 
