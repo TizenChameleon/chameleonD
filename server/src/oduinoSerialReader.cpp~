@@ -131,7 +131,7 @@ int SerialReader::parse()
 	tmp_position = strstr(tmp_str, "%");
 	*tmp_position = 0;
 	humidity = atoi(tmp_str);
-	tcflush(fd, TCIFLUSH);
+
 
 	return 1;
 }
