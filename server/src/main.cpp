@@ -1,5 +1,11 @@
 #include <Ecore.h>
+#include <dlog.h>
 #include "oduinoSerialReader.h"
+
+#define LOG_TAG		"chameleonD" 
+#define DLOG_ERR	DLOG_ERROR
+#define PRT_ERR(fmt, arg...) \
+	do { SLOG(LOG_ERR, LOG_TAG, fmt, ##arg); } while (0)
 
 Ecore_Timer         *timer     = NULL;
 Ecore_Event_Handler *handler   = NULL;
@@ -12,7 +18,7 @@ getSensor_redrawScreen(void *data)
 {
    temp = serialReader.get_Temperature();
    hum = serialReader.get_Humidity();
-printf("Temperature %d, Humidity %d\n",templ, hum);
+PRT_ERR("Temperature %d, Humidity %d\n",templ, hum);
    return ECORE_CALLBACK_RENEW;
 }
 
