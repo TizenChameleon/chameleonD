@@ -7,6 +7,8 @@
 #define PRT_ERR(fmt, arg...) \
 	do { SLOG(LOG_ERR, LOG_TAG, fmt, ##arg); } while (0)
 
+EAPI void evas_temp_humid_set(int _temp, int _humid);
+
 Ecore_Timer         *sensor_timer     = NULL;
 Ecore_Timer         *redraw_timer     = NULL;
 Ecore_Event_Handler *handler   = NULL;
@@ -23,7 +25,8 @@ redrawScreen(void *data)
 {
    temp = serialReader.get_Temperature();
    hum = serialReader.get_Humidity();
-PRT_ERR("Temperature %d, Humidity %d\n",temp, hum);
+   PRT_ERR("Temperature %d, Humidity %d\n",temp, hum);
+   evas_temp_humid_set(temp, hum);
    return ECORE_CALLBACK_RENEW;
 }
 
