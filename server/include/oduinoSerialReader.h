@@ -1,4 +1,5 @@
 #include <termios.h>
+
 //
 #define DEVICE_NAME1 "/dev/ttyACM0"
 #define DEVICE_NAME2 "/dev/ttyACM1"
