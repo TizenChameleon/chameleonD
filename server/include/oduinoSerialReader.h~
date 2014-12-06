@@ -1,5 +1,6 @@
 #include <termios.h>
 
+EAPI extern void evas_temp_humid_set(int _temp, int _humid);
 //
 #define DEVICE_NAME1 "/dev/ttyACM0"
 #define DEVICE_NAME2 "/dev/ttyACM1"
@@ -25,5 +26,5 @@ public:
 	int parse();
 	int get_Temperature();
 	int get_Humidity();
-        void Run(void);
+
 };

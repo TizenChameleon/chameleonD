@@ -1,5 +1,7 @@
 #include <Ecore.h>
+#include <Evas.h>
 #include <dlog.h>
+#include <stdio.h>
 #include "oduinoSerialReader.h"
 
 #define LOG_TAG		"chameleonD" 
@@ -7,12 +9,11 @@
 #define PRT_ERR(fmt, arg...) \
 	do { SLOG(LOG_ERR, LOG_TAG, fmt, ##arg); } while (0)
 
-EAPI void evas_temp_humid_set(int _temp, int _humid);
-
 Ecore_Timer         *sensor_timer     = NULL;
 Ecore_Timer         *redraw_timer     = NULL;
 Ecore_Event_Handler *handler   = NULL;
 SerialReader serialReader;
+
 int temp=0, hum=0;
 Eina_Bool
 getSensor(void *data)
@@ -23,10 +24,14 @@ getSensor(void *data)
 Eina_Bool
 redrawScreen(void *data)
 {
+   FILE *sysfs;
+   sysfs = fopen("/sys/class/Vsensor/oduino/oduino_sensor", "w");
+
    temp = serialReader.get_Temperature();
    hum = serialReader.get_Humidity();
+   fprintf(sysfs, "%d %d", temp, hum);
+   fclose(sysfs);
    PRT_ERR("Temperature %d, Humidity %d\n",temp, hum);
-   evas_temp_humid_set(temp, hum);
    return ECORE_CALLBACK_RENEW;
 }
 

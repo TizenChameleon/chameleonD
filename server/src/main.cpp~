@@ -1,13 +1,13 @@
 #include <Ecore.h>
+#include <Evas.h>
 #include <dlog.h>
+#include <stdio.h>
 #include "oduinoSerialReader.h"
 
 #define LOG_TAG		"chameleonD" 
 #define DLOG_ERR	DLOG_ERROR
 #define PRT_ERR(fmt, arg...) \
 	do { SLOG(LOG_ERR, LOG_TAG, fmt, ##arg); } while (0)
-
-EAPI void evas_temp_humid_set(int _temp, int _humid);
 
 Ecore_Timer         *sensor_timer     = NULL;
 Ecore_Timer         *redraw_timer     = NULL;
@@ -23,9 +23,14 @@ getSensor(void *data)
 Eina_Bool
 redrawScreen(void *data)
 {
+   FILE *sysfs;
+   sysfs = fopen("/sys/class/Vsensor/oduino/oduino_sensor", "w");
+
    temp = serialReader.get_Temperature();
    hum = serialReader.get_Humidity();
-PRT_ERR("Temperature %d, Humidity %d\n",temp, hum);
+   fprintf(sysfs, "%d %d", temp, hum);
+   fclose(sysfs);
+   PRT_ERR("Temperature %d, Humidity %d\n",temp, hum);
    return ECORE_CALLBACK_RENEW;
 }
 
