@@ -1,5 +1,4 @@
 #include <Ecore.h>
-#include <Evas.h>
 #include <dlog.h>
 #include <stdio.h>
 #include "oduinoSerialReader.h"
