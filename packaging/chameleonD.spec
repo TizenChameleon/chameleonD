@@ -1,12 +1,12 @@
 ## Basic Descriptions of this package
-Name:       SAMPLE
-Summary:    SAMPLE
+Name:       chameleonD
+Summary:    chameleonD
 Version:		1.0
 Release:    1
 Group:      Framework/system
 License:    Apache License, Version 2.0
 Source0:    %{name}-%{version}.tar.gz
-Source1:    SAMPLE.service
+Source1:    chameleonD.service
 
 # Required packages
 # Pkgconfig tool helps to find libraries that have already been installed
@@ -47,15 +47,15 @@ cp LICENSE %{buildroot}/usr/share/license/%{name}
 # install systemd service
 mkdir -p %{buildroot}%{_libdir}/systemd/system/graphical.target.wants
 install -m 0644 %SOURCE1 %{buildroot}%{_libdir}/systemd/system/
-ln -s ../SAMPLE.service %{buildroot}%{_libdir}/systemd/system/graphical.target.wants/SAMPLE.service
+ln -s ../chameleonD.service %{buildroot}%{_libdir}/systemd/system/graphical.target.wants/chameleonD.service
 
 ## Postprocess script
 %post 
 
 ## Binary Package: File list
 %files
-%manifest SAMPLE.manifest
-%{_bindir}/SAMPLE_server
-%{_libdir}/systemd/system/SAMPLE.service
-%{_libdir}/systemd/system/graphical.target.wants/SAMPLE.service
+%manifest chameleonD.manifest
+%{_bindir}/chameleonD_server
+%{_libdir}/systemd/system/chameleonD.service
+%{_libdir}/systemd/system/graphical.target.wants/chameleonD.service
 /usr/share/license/%{name}

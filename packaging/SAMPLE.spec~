@@ -55,7 +55,7 @@ ln -s ../SAMPLE.service %{buildroot}%{_libdir}/systemd/system/graphical.target.w
 ## Binary Package: File list
 %files
 %manifest SAMPLE.manifest
-%{_bindir}/SAMPLE
+%{_bindir}/SAMPLE_server
 %{_libdir}/systemd/system/SAMPLE.service
 %{_libdir}/systemd/system/graphical.target.wants/SAMPLE.service
 /usr/share/license/%{name}

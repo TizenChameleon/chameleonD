@@ -1,4 +1,4 @@
-project(chameleonD_server)
+project(SAMPLE_server)
 
 # Find required modules
 # PKG_CHECK_MODULES: used to check for given modules
